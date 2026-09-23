@@ -34,7 +34,7 @@ const jsonLd = [
     tech: data.tech,
   }),
   breadcrumbJsonLd([
-    { label: 'Works', href: '/projects' },
+    { label: '作品', href: '/projects' },
     { label: data.title },
   ]),
 ];
@@ -46,21 +46,18 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <article>
-    <header class="relative overflow-hidden border-b border-line hero-veil">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span class="aurora-blob left-[10%] top-[-40%] h-[20rem] w-[20rem] bg-sky"></span>
-      </div>
+    <header class="relative overflow-hidden border-b border-line soft-wash">
 
       <div class="shell relative py-14 md:py-20">
         <div data-reveal>
-          <Breadcrumbs items={[{ label: 'Works', href: '/projects' }, { label: data.title }]} />
+          <Breadcrumbs items={[{ label: '作品', href: '/projects' }, { label: data.title }]} />
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-10 md:grid-cols-12">
           <div class="md:col-span-8" data-reveal>
             <div class="flex flex-wrap items-center gap-3">
-              <span class="eyebrow">{data.categoryLabel}</span>
-              <span class="font-mono text-[11px] text-faint">{data.year}</span>
+              <span class="label">{data.categoryLabel}</span>
+              <span class="text-xs text-faint">{data.year}</span>
               <span class="k-tag">{data.status}</span>
             </div>
             <h1 class="palt mt-5 font-display text-3xl font-semibold text-ink md:text-4xl">
@@ -77,12 +74,12 @@ const jsonLd = [
 
           <aside class="md:col-span-4" data-reveal>
             <div class="k-card p-6">
-              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Highlights</p>
+              <p class="text-xs text-faint">この作品のポイント</p>
               <ul class="mt-4 space-y-3">
                 {
                   data.highlights.map((h) => (
-                    <li class="flex items-start gap-2.5 text-sm leading-relaxed text-muted">
-                      <span class="ph ph-caret-right mt-1 text-xs text-cobalt" aria-hidden="true" />
+                    <li class="flex items-start gap-3 text-sm leading-relaxed text-muted">
+                      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden="true" />
                       <span>{h}</span>
                     </li>
                   ))
@@ -93,7 +90,7 @@ const jsonLd = [
                   href={data.repo}
                   target="_blank"
                   rel="noopener"
-                  class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-cobalt"
+                  class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-blue"
                 >
                   <span class="ph ph-github-logo text-base" aria-hidden="true"></span>
                   GitHub
@@ -105,7 +102,7 @@ const jsonLd = [
                       href={data.demo}
                       target="_blank"
                       rel="noopener"
-                      class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-cobalt"
+                      class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-blue"
                     >
                       Demo
                       <span class="k-arrow">→</span>
@@ -128,7 +125,7 @@ const jsonLd = [
         <nav class="mt-16 flex items-center justify-between gap-6 border-t border-line pt-8" aria-label="作品の移動">
           {
             prev ? (
-              <a href={`/projects/${prev.id}/`} class="k-arrow-link text-sm text-muted transition-colors hover:text-cobalt">
+              <a href={`/projects/${prev.id}/`} class="k-arrow-link text-sm text-muted transition-colors hover:text-blue">
                 <span class="mr-2" aria-hidden="true">←</span>
                 {prev.data.title}
               </a>
@@ -140,7 +137,7 @@ const jsonLd = [
             next ? (
               <a
                 href={`/projects/${next.id}/`}
-                class="k-arrow-link text-right text-sm text-muted transition-colors hover:text-cobalt"
+                class="k-arrow-link text-right text-sm text-muted transition-colors hover:text-blue"
               >
                 {next.data.title}
                 <span class="k-arrow ml-2" aria-hidden="true">→</span>

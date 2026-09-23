@@ -1,16 +1,16 @@
 ---
 // ============================================================
-// FilterTabs — 作品一覧のフィルタ（クライアント側）
+// FilterTabs — 作品一覧のフィルタ（下線スタイル）
 // ============================================================
 const TABS = [
-  { key: 'all', label: 'All', labelJa: 'すべて' },
-  { key: 'ai', label: 'AI', labelJa: 'AI・自動化' },
-  { key: 'app', label: 'App', labelJa: 'アプリ' },
-  { key: 'web', label: 'Web', labelJa: 'Web' },
+  { key: 'all', label: 'すべて' },
+  { key: 'ai', label: 'AI・自動化' },
+  { key: 'app', label: 'アプリ' },
+  { key: 'web', label: 'Web' },
 ] as const;
 ---
 
-<div class="flex flex-wrap gap-2" role="tablist" aria-label="作品の絞り込み" data-reveal>
+<div class="flex flex-wrap gap-6 border-b border-line" role="tablist" aria-label="作品の絞り込み" data-reveal>
   {
     TABS.map((tab, i) => (
       <button
@@ -18,22 +18,13 @@ const TABS = [
         role="tab"
         data-filter={tab.key}
         aria-selected={i === 0 ? 'true' : 'false'}
-        class="filter-tab rounded-full border border-line bg-surface px-4 py-2 font-display text-xs text-muted transition-all duration-200 hover:border-cobalt/50 hover:text-cobalt aria-selected:border-transparent aria-selected:text-white"
+        class="filter-tab -mb-px border-b-2 border-transparent px-0.5 pb-3 text-sm text-muted transition-colors hover:text-ink aria-selected:border-blue aria-selected:font-medium aria-selected:text-ink"
       >
-        <span>{tab.label}</span>
-        <span class="ml-1.5 text-[10px] opacity-70">{tab.labelJa}</span>
+        {tab.label}
       </button>
     ))
   }
 </div>
-
-<style>
-  @layer components {
-    .filter-tab[aria-selected='true'] {
-      background-image: linear-gradient(135deg, #2563eb 0%, #4f46e5 48%, #0ea5a5 100%);
-    }
-  }
-</style>
 
 <script>
   const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-tab');

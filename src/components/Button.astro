@@ -1,7 +1,6 @@
 ---
 // ============================================================
-// Button — 共通ボタン
-//   variant: primary（グラデーション）/ secondary（枠線）/ ghost
+// Button — 共通ボタン（グラデーションは使わず、落ち着いた単色）
 // ============================================================
 interface Props {
   href: string;
@@ -15,7 +14,7 @@ interface Props {
 const { href, label, variant = 'primary', external = false, arrow = true, size = 'md' } = Astro.props;
 
 const base =
-  'group inline-flex items-center justify-center gap-2 rounded-full font-display font-medium transition-all duration-300';
+  'group inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300';
 
 const sizes = {
   md: 'px-6 py-3 text-sm',
@@ -23,23 +22,15 @@ const sizes = {
 };
 
 const variants = {
-  primary:
-    'text-white shadow-[0_12px_30px_-14px_rgba(37,99,235,0.65)] hover:opacity-90 hover:shadow-[0_18px_40px_-16px_rgba(37,99,235,0.7)]',
-  secondary: 'border border-line bg-surface text-ink hover:border-cobalt/50 hover:text-cobalt',
-  ghost: 'text-muted hover:text-cobalt',
+  primary: 'bg-blue text-on-blue hover:bg-blue-deep',
+  secondary: 'border border-line bg-surface text-ink hover:border-blue/50 hover:text-blue',
+  ghost: 'text-muted hover:text-blue',
 };
 
 const ext = external ? { target: '_blank', rel: 'noopener' } : {};
 ---
 
-<a
-  href={href}
-  {...ext}
-  class={`${base} ${sizes[size]} ${variants[variant]}`}
-  style={variant === 'primary'
-    ? 'background-image: linear-gradient(135deg, #2563EB 0%, #4F46E5 48%, #0EA5A5 100%)'
-    : undefined}
->
+<a href={href} {...ext} class={`${base} ${sizes[size]} ${variants[variant]}`}>
   <span>{label}</span>
   {
     arrow && (

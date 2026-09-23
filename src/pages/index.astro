@@ -17,71 +17,39 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order
 );
 const featured = projects.slice(0, 3);
-const chips = SKILLS_CAN.flatMap((g) => g.items).slice(0, 8);
+const chips = SKILLS_CAN.flatMap((g) => g.items).slice(0, 6);
 ---
 
 <BaseLayout>
   <!-- ═══════════ ヒーロー ═══════════ -->
-  <section class="relative overflow-hidden hero-veil">
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <span class="aurora-blob left-[-10%] top-[-20%] h-[26rem] w-[26rem] bg-sky"></span>
-      <span
-        class="aurora-blob right-[-5%] top-[5%] h-[22rem] w-[22rem] bg-indigo"
-        style="animation-delay: -8s"
-      ></span>
-      <span
-        class="aurora-blob left-[35%] top-[45%] h-[18rem] w-[18rem] bg-teal"
-        style="animation-delay: -16s"
-      ></span>
-    </div>
-
-    <div class="shell relative pb-20 pt-16 md:pb-28 md:pt-24">
-      <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-12">
-        <div class="md:col-span-8" data-reveal>
-          <div class="flex items-center gap-3">
-            <Monogram size={56} decorative />
-            <div class="leading-tight">
-              <p class="font-display text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-                {SITE.handle}
-              </p>
-              <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
-                {SITE.nameJa}
-              </p>
-            </div>
+  <section class="soft-wash border-b border-line">
+    <div class="shell py-20 md:py-28">
+      <div class="max-w-2xl" data-reveal>
+        <div class="flex items-center gap-3">
+          <Monogram size={52} decorative />
+          <div class="leading-tight">
+            <p class="font-display text-2xl font-semibold tracking-tight text-ink">
+              {SITE.handle}
+            </p>
+            <p class="text-xs text-muted">{SITE.nameJa} ／ {SITE.titleJa}</p>
           </div>
-
-          <p class="eyebrow mt-10">Build / Ship / Document</p>
-          <h1 class="palt mt-4 font-display text-3xl font-semibold leading-tight text-ink md:text-5xl">
-            {SITE.taglineJa}
-          </h1>
-          <p class="mt-6 max-w-xl leading-relaxed text-muted">
-            {SITE.leadJa}
-          </p>
-          <p class="mt-2 font-display text-sm text-faint" lang="en">{SITE.leadEn}</p>
-
-          <div class="mt-9 flex flex-col gap-4 sm:flex-row">
-            <Button href="/projects" label="作品を見る" variant="primary" />
-            <Button href="/contact" label="連絡する" variant="secondary" />
-          </div>
-
-          <div class="mt-10 flex flex-wrap gap-2">
-            {chips.map((c) => <span class="k-tag">{c}</span>)}
-          </div>
-
-          <p class="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
-            {SITE.titleJa} ／ {SITE.region} ／ 個人開発
-          </p>
         </div>
 
-        <div class="hidden md:col-span-4 md:block" data-reveal>
-          <div class="k-code">
-            <code>{`// つくっているもの
-const profile = {
-  handle: '${SITE.handle}',
-  builds: ['AI', 'Web', 'App'],
-  principle: 'small steps, honest notes',
-};`}</code>
-          </div>
+        <h1 class="palt mt-12 font-display text-3xl font-semibold leading-snug text-ink md:text-[2.6rem]">
+          {SITE.taglineJa}
+        </h1>
+        <p class="mt-6 leading-relaxed text-muted">
+          {SITE.leadJa}
+        </p>
+        <p class="mt-2 text-sm text-faint" lang="en">{SITE.leadEn}</p>
+
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+          <Button href="/projects" label="作品を見る" variant="primary" />
+          <Button href="/contact" label="連絡する" variant="secondary" />
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-2">
+          {chips.map((c) => <span class="k-tag">{c}</span>)}
         </div>
       </div>
     </div>
@@ -92,13 +60,13 @@ const profile = {
     <div class="shell">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
-          label="Works"
+          label="作品"
           title="つくってきたもの。"
           description="すべて個人開発のプロジェクトです。設計の理由や、つまずいた点も書いています。"
         />
         <a
           href="/projects"
-          class="k-arrow-link mb-2 hidden items-center gap-2 font-display text-sm text-muted transition-colors hover:text-cobalt md:inline-flex"
+          class="k-arrow-link mb-2 hidden items-center gap-2 text-sm text-muted transition-colors hover:text-blue md:inline-flex"
         >
           すべての作品
           <span class="k-arrow">→</span>
@@ -112,34 +80,35 @@ const profile = {
   </section>
 
   <!-- ═══════════ About（短縮） ═══════════ -->
-  <section class="section">
+  <section class="section border-y border-line">
     <div class="shell">
       <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
         <div class="md:col-span-5" data-reveal>
           <SectionHeading
-            label="About"
+            label="私について"
             title="つくるのが、好きです。"
             description="パソコンが好きで、AIでつくることに夢中になって、気づけば毎日システムをつくっています。高校生。愛知県豊橋市。"
           />
-        </div>
-        <div class="md:col-span-7" data-reveal>
-          <ul class="space-y-4">
-            {
-              [
-                '考えたことを、その日のうちに形にする',
-                'つくったものは、設計もコードも公開する',
-                'うまくいかなかったことも、正直に書く',
-              ].map((text) => (
-                <li class="flex items-start gap-3 rounded-2xl border border-line bg-surface px-5 py-4">
-                  <span class="ph ph-check-circle mt-0.5 text-lg text-cobalt" aria-hidden="true" />
-                  <span class="text-sm text-muted">{text}</span>
-                </li>
-              ))
-            }
-          </ul>
           <div class="mt-7">
             <Button href="/about" label="もっと知る" variant="secondary" size="sm" />
           </div>
+        </div>
+        <div class="space-y-5 md:col-span-7" data-reveal>
+          {
+            [
+              { title: 'その日のうちに形にする', body: '考えたことを、まず動くところまでつくってみる。' },
+              { title: '設計もコードも公開する', body: 'つくったものは、中身まで見える形で残しておきたい。' },
+              { title: 'うまくいかなかったことも書く', body: 'つまずいた記録のほうが、あとで誰かの役に立つ。' },
+            ].map((item) => (
+              <div class="flex gap-4">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden="true"></span>
+                <div>
+                  <p class="font-medium text-ink">{item.title}</p>
+                  <p class="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -148,7 +117,7 @@ const profile = {
   <!-- ═══════════ Now（短縮） ═══════════ -->
   <section class="section">
     <div class="shell">
-      <SectionHeading label="Now" title="いま、やっていること。" />
+      <SectionHeading label="いま" title="いま、やっていること。" />
       <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
         {
           NOW.items.slice(0, 3).map((item, i) => (
@@ -162,7 +131,7 @@ const profile = {
       <div class="mt-8" data-reveal>
         <a
           href="/now"
-          class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-muted transition-colors hover:text-cobalt"
+          class="k-arrow-link inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-blue"
         >
           すべて見る（{NOW.updatedAt} 更新）
           <span class="k-arrow">→</span>

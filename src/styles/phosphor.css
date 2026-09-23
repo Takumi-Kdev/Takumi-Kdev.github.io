@@ -1,6 +1,6 @@
 /* ============================================================
    自動生成ファイル — scripts/build-phosphor-css.mjs
-   使用アイコンのみ（12個）。手で編集しない。
+   使用アイコンのみ（10個）。手で編集しない。
    Phosphor Icons — MIT License (https://phosphoricons.com)
    ============================================================ */
 @font-face {
@@ -41,12 +41,6 @@
 }
 .ph.ph-briefcase:before {
   content: "\e0ee";
-}
-.ph.ph-caret-right:before {
-  content: "\e13a";
-}
-.ph.ph-check-circle:before {
-  content: "\e184";
 }
 .ph.ph-code:before {
   content: "\e1bc";

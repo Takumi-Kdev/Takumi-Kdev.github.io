@@ -73,12 +73,12 @@ const isActive = (href: string) => current === href || current.startsWith(`${hre
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                aria-label={`${item.labelJa}（${item.label}）`}
-                class={`k-navlink font-display text-sm transition-colors ${
+                class={`k-navlink text-sm transition-colors ${
                   isActive(item.href) ? 'text-ink' : 'text-muted hover:text-ink'
                 }`}
               >
-                {item.label}
+                {item.labelJa}
+                <span class="ml-1.5 text-xs text-faint" aria-hidden="true">{item.label}</span>
               </a>
             </li>
           ))
@@ -87,7 +87,7 @@ const isActive = (href: string) => current === href || current.startsWith(`${hre
       <button
         id="theme-toggle"
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-cobalt/40 hover:text-cobalt"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-blue/40 hover:text-blue"
         aria-label="ダークモードに切り替える"
       >
         <span class="ph ph-moon text-lg" aria-hidden="true"></span>
@@ -135,8 +135,8 @@ const isActive = (href: string) => current === href || current.startsWith(`${hre
                   isActive(item.href) ? 'text-ink' : 'text-muted hover:text-ink'
                 }`}
               >
-                <span class="font-display text-sm">{item.label}</span>
-                <span class="text-xs">{item.labelJa}</span>
+                <span class="text-sm">{item.labelJa}</span>
+                <span class="text-xs text-faint">{item.label}</span>
               </a>
             </li>
           ))

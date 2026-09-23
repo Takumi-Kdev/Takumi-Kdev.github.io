@@ -13,20 +13,16 @@ import { SITE } from '../data/site';
   title="Contact — Takumi-Kdev"
   description="Takumi-Kdev への連絡先。開発についての相談は GitHub またはメールへ。仕事の依頼は巧黄土で受け付けています。"
 >
-  <section class="relative overflow-hidden hero-veil">
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <span class="aurora-blob left-[15%] top-[-35%] h-[22rem] w-[22rem] bg-sky"></span>
-    </div>
+  <section class="relative overflow-hidden soft-wash">
 
     <div class="shell relative py-16 md:py-24">
       <div data-reveal>
-        <Breadcrumbs items={[{ label: 'Contact' }]} />
+        <Breadcrumbs items={[{ label: '連絡' }]} />
       </div>
 
       <div class="mt-10 grid grid-cols-1 gap-10 md:grid-cols-12">
         <div class="md:col-span-6" data-reveal>
           <SectionHeading
-            label="Contact"
             title="お気軽に、どうぞ。"
             description="開発のこと、OSSのこと、学びのこと。メールかGitHubからどうぞ。"
           />
@@ -35,7 +31,7 @@ import { SITE } from '../data/site';
               href={`mailto:${SITE.email}`}
               class="k-card flex items-center gap-4 p-5"
             >
-              <span class="ph ph-envelope-simple text-xl text-cobalt" aria-hidden="true" />
+              <span class="ph ph-envelope-simple text-xl text-blue" aria-hidden="true" />
               <span>
                 <span class="block font-display text-sm text-ink">Mail</span>
                 <span class="mt-0.5 block break-all font-mono text-xs text-muted">{SITE.email}</span>
@@ -47,7 +43,7 @@ import { SITE } from '../data/site';
               rel="noopener"
               class="k-card flex items-center gap-4 p-5"
             >
-              <span class="ph ph-github-logo text-xl text-cobalt" aria-hidden="true" />
+              <span class="ph ph-github-logo text-xl text-blue" aria-hidden="true" />
               <span>
                 <span class="block font-display text-sm text-ink">GitHub</span>
                 <span class="mt-0.5 block font-mono text-xs text-muted">github.com/Takumi-Kdev</span>
@@ -57,8 +53,8 @@ import { SITE } from '../data/site';
         </div>
 
         <div class="md:col-span-6" data-reveal>
-          <div class="grad-border rounded-3xl p-8">
-            <p class="eyebrow mb-4">For business</p>
+          <div class="k-card rounded-3xl p-8">
+            <p class="label mb-4">For business</p>
             <h2 class="palt font-display text-xl font-semibold text-ink">
               仕事の依頼は、巧黄土で。
             </h2>

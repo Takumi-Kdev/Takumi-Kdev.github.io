@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { items } = Astro.props;
-const all = [{ label: 'Home', href: '/' }, ...items];
+const all = [{ label: 'ホーム', href: '/' }, ...items];
 ---
 
 <nav aria-label="パンくずリスト" class="font-mono text-xs">
@@ -18,7 +18,7 @@ const all = [{ label: 'Home', href: '/' }, ...items];
         return (
           <li class="flex items-center gap-2">
             {isLast || !item.href ? (
-              <span aria-current="page" class="text-cobalt">
+              <span aria-current="page" class="text-blue">
                 {item.label}
               </span>
             ) : (

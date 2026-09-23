@@ -18,7 +18,7 @@ const { groups } = Astro.props;
     groups.map((group, gi) => (
       <section class="k-card p-7" data-reveal style={`transition-delay: ${gi * 60}ms`}>
         <div class="flex items-center gap-3">
-          <span class={`${group.icon} text-xl text-cobalt`} aria-hidden="true" />
+          <span class={`${group.icon} text-xl text-blue`} aria-hidden="true" />
           <h2 class="font-display text-lg font-semibold text-ink">{group.title}</h2>
         </div>
         <ul class="mt-5 space-y-3">

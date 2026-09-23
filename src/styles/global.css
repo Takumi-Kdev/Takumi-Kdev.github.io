@@ -3,10 +3,10 @@
 
 /* ============================================================
    Takumi-Kdev — Design Tokens
-   青基調 / 余白豊か / ライト・ダーク切替
+   温かい紙色 × 落ち着いた青。装飾は控えめに、余白で見せる。
    ============================================================ */
 
-/* 見出し用（ラテン・可変ウェイト） */
+/* 見出し・ワードマーク用（ラテン・可変ウェイト） */
 @font-face {
   font-family: "Space Grotesk";
   src: url("/fonts/space-grotesk.woff2") format("woff2");
@@ -17,49 +17,49 @@
 
 @theme {
   /* ---- カラー（ライト） ---- */
-  --color-paper: #f7fafe;
+  --color-paper: #faf8f4;
   --color-surface: #ffffff;
-  --color-surface-alt: #edf4fc;
-  --color-ink: #0b1f35;
-  --color-muted: #516b88;
-  --color-faint: #5c728c;
-  --color-line: #dce7f5;
-  --color-cobalt: #2563eb;
-  --color-cobalt-deep: #1d4ed8;
-  --color-sky: #7db8ff;
-  --color-indigo: #4f46e5;
-  --color-teal: #0ea5a5;
-  --color-amber: #f59e0b;
+  --color-surface-alt: #f2eee7;
+  --color-ink: #22303c;
+  --color-muted: #5b6875;
+  --color-faint: #63707c;
+  --color-line: #e6e1d8;
+  --color-blue: #2b6cb0;
+  --color-blue-deep: #245a96;
+  --color-on-blue: #ffffff;
+  --color-teal: #3e8e88;
+  --color-amber: #c98a2e;
 
-  /* ---- タイポグラフィ（欧文はSpace Grotesk、和文はシステム） ---- */
+  /* ---- タイポグラフィ（和文はシステムフォント） ---- */
   --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP", Meiryo, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  /* ---- イージング・影 ---- */
+  /* ---- イージング・影（中性で柔らかく） ---- */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
-  --shadow-card: 0 1px 2px rgb(11 31 53 / 0.04), 0 12px 32px -20px rgb(37 99 235 / 0.25);
-  --shadow-lift: 0 2px 6px rgb(11 31 53 / 0.06), 0 28px 56px -28px rgb(37 99 235 / 0.35);
+  --shadow-card: 0 1px 2px rgb(34 48 60 / 0.05), 0 14px 30px -22px rgb(34 48 60 / 0.25);
+  --shadow-lift: 0 2px 6px rgb(34 48 60 / 0.06), 0 24px 48px -28px rgb(34 48 60 / 0.3);
 }
 
 /* ============================================================
-   ダークテーマ（トークンを差し替える）
+   ダークテーマ
    ============================================================ */
 @layer base {
   [data-theme="dark"] {
-    --color-paper: #071426;
-    --color-surface: #0c1e33;
-    --color-surface-alt: #102741;
-    --color-ink: #e8f1fb;
-    --color-muted: #9fb6ce;
-    --color-faint: #6c86a3;
-    --color-line: #1b3350;
-    --color-cobalt: #60a5fa;
-    --color-cobalt-deep: #3b82f6;
-    --color-indigo: #818cf8;
-    --color-teal: #2dd4bf;
-    --shadow-card: 0 1px 2px rgb(2 8 20 / 0.4), 0 12px 32px -20px rgb(2 8 20 / 0.6);
-    --shadow-lift: 0 2px 6px rgb(2 8 20 / 0.5), 0 28px 56px -28px rgb(2 8 20 / 0.7);
+    --color-paper: #121a22;
+    --color-surface: #18222c;
+    --color-surface-alt: #1e2a35;
+    --color-ink: #eceff2;
+    --color-muted: #a8b4bf;
+    --color-faint: #8b98a4;
+    --color-line: #2a3743;
+    --color-blue: #7cb1e0;
+    --color-blue-deep: #9cc4ea;
+    --color-on-blue: #0f1620;
+    --color-teal: #6fc3bc;
+    --color-amber: #e0b266;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 30px -22px rgb(0 0 0 / 0.5);
+    --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.35), 0 24px 48px -28px rgb(0 0 0 / 0.55);
   }
 
   html {
@@ -81,14 +81,25 @@
     transition: background-color 0.3s var(--ease-soft), color 0.3s var(--ease-soft);
   }
 
+  /* 紙の質感（ごく淡い） */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   h1, h2, h3 { text-wrap: balance; }
   p, li { text-wrap: pretty; }
 
-  ::selection { background-color: rgb(37 99 235 / 0.25); }
+  ::selection { background-color: rgb(43 108 176 / 0.2); }
 
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(37 99 235 / 0.6);
+    box-shadow: 0 0 0 2px rgb(43 108 176 / 0.55);
     border-radius: 8px;
   }
 
@@ -96,7 +107,7 @@
     touch-action: manipulation;
   }
 
-  [id] { scroll-margin-top: 6rem; }
+  [id] { scroll-margin-top: 5.5rem; }
 
   /* 和文の詰め */
   .palt {
@@ -111,57 +122,53 @@
 @layer components {
   .shell {
     width: 100%;
-    max-width: 76rem;
+    max-width: 72rem;
     margin-inline: auto;
     padding-inline: 1.5rem;
   }
   @media (min-width: 1024px) {
     .shell { padding-inline: 2rem; }
   }
-  .shell-narrow { max-width: 52rem; }
+  .shell-narrow { max-width: 50rem; }
 
-  .section { padding-block: clamp(5rem, 10vw, 9rem); }
-  .section-tight { padding-block: clamp(3rem, 6vw, 5rem); }
+  .section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+  .section-tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-cobalt);
+  /* 小さなラベル（大文字・字間広げをやめた自然な形） */
+  .label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-blue);
   }
 
-  .grad-text {
-    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 48%, #0ea5a5 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .grad-border {
-    position: relative;
+  /* ヒーローのやわらかな光（オーロラの代わりに、ごく淡い1枚） */
+  .soft-wash {
     background:
-      linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-      linear-gradient(135deg, rgb(37 99 235 / 0.5), rgb(79 70 229 / 0.35), rgb(14 165 165 / 0.4)) border-box;
-    border: 1px solid transparent;
+      radial-gradient(60% 50% at 15% 0%, rgb(43 108 176 / 0.07), transparent 70%),
+      radial-gradient(50% 45% at 90% 10%, rgb(62 142 136 / 0.05), transparent 70%);
+  }
+  [data-theme="dark"] .soft-wash {
+    background:
+      radial-gradient(60% 50% at 15% 0%, rgb(124 177 224 / 0.08), transparent 70%),
+      radial-gradient(50% 45% at 90% 10%, rgb(111 195 188 / 0.06), transparent 70%);
   }
 
   /* ---- カード ---- */
   .k-card {
     position: relative;
-    border-radius: 20px;
+    border-radius: 16px;
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     box-shadow: var(--shadow-card);
     transition:
-      translate 0.45s var(--ease-soft),
-      box-shadow 0.45s var(--ease-soft),
-      border-color 0.45s var(--ease-soft);
+      translate 0.4s var(--ease-soft),
+      box-shadow 0.4s var(--ease-soft),
+      border-color 0.4s var(--ease-soft);
   }
   .k-card:hover {
-    translate: 0 -4px;
+    translate: 0 -3px;
     box-shadow: var(--shadow-lift);
-    border-color: color-mix(in srgb, var(--color-cobalt) 35%, transparent);
+    border-color: color-mix(in srgb, var(--color-blue) 30%, var(--color-line));
   }
 
   /* ---- タグ ---- */
@@ -169,12 +176,12 @@
     display: inline-block;
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    line-height: 1.4;
-    padding: 0.25rem 0.6rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-line);
+    line-height: 1.5;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
     color: var(--color-muted);
-    background: var(--color-surface);
+    background: var(--color-surface-alt);
   }
 
   /* ---- リンク（矢印） ---- */
@@ -182,46 +189,28 @@
     display: inline-block;
     transition: transform 0.3s var(--ease-soft);
   }
-  .k-arrow-link:hover .k-arrow { transform: translateX(5px); }
+  .k-arrow-link:hover .k-arrow { transform: translateX(4px); }
 
-  /* ---- ナビリンク ---- */
+  /* ---- ナビリンク（下線） ---- */
   .k-navlink { position: relative; }
   .k-navlink::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -8px;
+    bottom: -7px;
     width: 100%;
     height: 2px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-cobalt), var(--color-teal));
+    background: var(--color-blue);
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.35s var(--ease-soft);
+    transition: transform 0.32s var(--ease-soft);
   }
   .k-navlink:hover::after,
   .k-navlink[aria-current="page"]::after {
     transform: scaleX(1);
     transform-origin: left;
   }
-
-  /* ---- コードカード ---- */
-  .k-code {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    line-height: 1.8;
-    background: var(--color-surface);
-    border: 1px solid var(--color-line);
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    color: var(--color-muted);
-    box-shadow: var(--shadow-card);
-    overflow-x: auto;
-    white-space: pre;
-  }
-  .k-code .tok-key { color: var(--color-cobalt); }
-  .k-code .tok-str { color: var(--color-teal); }
-  .k-code .tok-com { color: var(--color-faint); }
 
   /* ---- スキップリンク ---- */
   .skip-link {
@@ -233,7 +222,6 @@
     border-radius: 8px;
     background: var(--color-ink);
     color: var(--color-paper);
-    font-family: var(--font-mono);
     font-size: 0.75rem;
     transform: translateY(-200%);
   }
@@ -241,44 +229,12 @@
 }
 
 /* ============================================================
-   オーロラ背景
-   ============================================================ */
-@keyframes aurora-drift {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(2%, -3%, 0) scale(1.06); }
-}
-.aurora-blob {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(90px);
-  opacity: 0.5;
-  animation: aurora-drift 26s ease-in-out infinite;
-  pointer-events: none;
-}
-[data-theme="dark"] .aurora-blob { opacity: 0.25; }
-
-/* ヒーローの文字が読みやすいよう、紙色のベールを重ねる */
-.hero-veil::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at 35% 45%,
-    color-mix(in srgb, var(--color-paper) 85%, transparent) 0%,
-    transparent 70%
-  );
-}
-
-/* ============================================================
    スクロール表示
-   ・JS実行前は常に表示（白画面の事故を防ぐ）
-   ・実行後に画面内を即表示し、画面外のみIOで表示
    ============================================================ */
 [data-reveal] { opacity: 1; transform: none; }
 html.is-anim [data-reveal]:not(.is-revealed) {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
 }
 html.is-anim [data-reveal].is-revealed {
   opacity: 1;
@@ -295,10 +251,9 @@ html.is-anim [data-reveal].is-revealed {
 }
 .prose-k > *:first-child { margin-top: 0; }
 .prose-k h2 {
-  font-family: var(--font-display);
   font-weight: 600;
   color: var(--color-ink);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   margin-top: 2.75em;
   margin-bottom: 0.8em;
   padding-bottom: 0.45em;
@@ -307,7 +262,7 @@ html.is-anim [data-reveal].is-revealed {
 .prose-k h3 {
   font-weight: 600;
   color: var(--color-ink);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin-top: 2em;
   margin-bottom: 0.6em;
 }
@@ -321,13 +276,13 @@ html.is-anim [data-reveal].is-revealed {
 }
 .prose-k ul { list-style: disc; }
 .prose-k ol { list-style: decimal; }
-.prose-k li::marker { color: var(--color-cobalt); }
+.prose-k li::marker { color: var(--color-blue); }
 .prose-k a {
-  color: var(--color-cobalt);
+  color: var(--color-blue);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.prose-k a:hover { color: var(--color-indigo); }
+.prose-k a:hover { color: var(--color-blue-deep); }
 .prose-k code {
   font-family: var(--font-mono);
   font-size: 0.85em;
@@ -347,7 +302,7 @@ html.is-anim [data-reveal].is-revealed {
 }
 .prose-k pre code { background: transparent; padding: 0; color: inherit; }
 .prose-k blockquote {
-  border-left: 3px solid var(--color-cobalt);
+  border-left: 3px solid var(--color-blue);
   padding-left: 1.1em;
   margin-top: 1.2em;
 }
@@ -379,7 +334,6 @@ html.is-anim [data-reveal].is-revealed {
     transform: none !important;
     transition: none !important;
   }
-  .aurora-blob { animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

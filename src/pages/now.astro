@@ -13,17 +13,13 @@ import { NOW } from '../data/now';
   title="Now — Takumi-Kdev"
   description="Takumi-Kdev がいま取り組んでいること。開発中のもの、学んでいること、読みたい本などを更新日つきでまとめています。"
 >
-  <section class="relative overflow-hidden hero-veil">
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <span class="aurora-blob left-[-8%] top-[-25%] h-[20rem] w-[20rem] bg-indigo"></span>
-    </div>
+  <section class="relative overflow-hidden soft-wash">
     <div class="shell relative pb-10 pt-14 md:pt-20">
       <div data-reveal>
-        <Breadcrumbs items={[{ label: 'Now' }]} />
+        <Breadcrumbs items={[{ label: '近況' }]} />
       </div>
       <div class="mt-8">
         <SectionHeading
-          label="Now"
           title="いま、やっていること。"
           description={`更新日: ${NOW.updatedAt}。SNSより落ち着いた近況の置き場です。`}
         />

@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-const jsonLd = [breadcrumbJsonLd([{ label: 'Works', href: '/projects' }])];
+const jsonLd = [breadcrumbJsonLd([{ label: '作品', href: '/projects' }])];
 ---
 
 <BaseLayout
@@ -23,22 +23,15 @@ const jsonLd = [breadcrumbJsonLd([{ label: 'Works', href: '/projects' }])];
   description="Takumi-Kdev の個人開発プロジェクト一覧。AIシステム、業務自動化、アプリ開発の設計と実装をまとめています。"
   jsonLd={jsonLd}
 >
-  <section class="relative overflow-hidden hero-veil">
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <span class="aurora-blob right-[-10%] top-[-30%] h-[22rem] w-[22rem] bg-sky"></span>
-      <span
-        class="aurora-blob left-[-8%] top-[20%] h-[18rem] w-[18rem] bg-indigo"
-        style="animation-delay: -10s"
-      ></span>
-    </div>
+  <section class="relative overflow-hidden soft-wash">
 
     <div class="shell relative pb-10 pt-14 md:pt-20">
       <div data-reveal>
-        <Breadcrumbs items={[{ label: 'Works' }]} />
+        <Breadcrumbs items={[{ label: '作品' }]} />
       </div>
       <div class="mt-8">
         <SectionHeading
-          label="Works"
+          label="作品"
           title="つくってきたもの。"
           description="すべて個人開発のプロジェクトです。何を考えて、どうつくったかまで書いています。"
         />
