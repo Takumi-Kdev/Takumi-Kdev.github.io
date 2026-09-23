@@ -1,23 +1,26 @@
 ---
 // ============================================================
 // SectionHeading — ラベル + 見出し（自然なトーン）
+//   level: 見出しレベル（既定 h2、ヒーローでは h1）
 // ============================================================
 interface Props {
   label?: string;
   title: string;
   description?: string;
   align?: 'left' | 'center';
+  level?: 'h1' | 'h2' | 'h3';
 }
 
-const { label, title, description, align = 'left' } = Astro.props;
+const { label, title, description, align = 'left', level = 'h2' } = Astro.props;
 const isCenter = align === 'center';
+const Tag = level;
 ---
 
 <div class={`max-w-2xl ${isCenter ? 'mx-auto text-center' : ''}`} data-reveal>
   {label && <p class="label mb-3">{label}</p>}
-  <h2 class="palt font-display text-2xl font-semibold leading-snug text-ink md:text-[1.7rem]">
+  <Tag class="palt font-display text-2xl font-semibold leading-snug text-ink md:text-[1.7rem]">
     {title}
-  </h2>
+  </Tag>
   <span class={`mt-5 block h-0.5 w-10 rounded-full bg-blue ${isCenter ? 'mx-auto' : ''}`}></span>
   {description && <p class="mt-6 leading-relaxed text-muted">{description}</p>}
 </div>

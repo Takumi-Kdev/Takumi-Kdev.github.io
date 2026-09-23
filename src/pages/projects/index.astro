@@ -31,6 +31,7 @@ const jsonLd = [breadcrumbJsonLd([{ label: '作品', href: '/projects' }])];
       </div>
       <div class="mt-8">
         <SectionHeading
+          level="h1"
           label="作品"
           title="つくってきたもの。"
           description="すべて個人開発のプロジェクトです。何を考えて、どうつくったかまで書いています。"
@@ -44,6 +45,7 @@ const jsonLd = [breadcrumbJsonLd([{ label: '作品', href: '/projects' }])];
 
   <section class="pb-20 md:pb-28">
     <div class="shell">
+      <h2 class="sr-only">作品一覧</h2>
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
       </div>
