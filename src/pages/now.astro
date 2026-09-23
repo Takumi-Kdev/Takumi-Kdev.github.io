@@ -1,0 +1,54 @@
+---
+// ============================================================
+// Now — いまやっていること
+// ============================================================
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import KoodoBand from '../components/KoodoBand.astro';
+import { NOW } from '../data/now';
+---
+
+<BaseLayout
+  title="Now — Takumi-Kdev"
+  description="Takumi-Kdev がいま取り組んでいること。開発中のもの、学んでいること、読みたい本などを更新日つきでまとめています。"
+>
+  <section class="relative overflow-hidden hero-veil">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <span class="aurora-blob left-[-8%] top-[-25%] h-[20rem] w-[20rem] bg-indigo"></span>
+    </div>
+    <div class="shell relative pb-10 pt-14 md:pt-20">
+      <div data-reveal>
+        <Breadcrumbs items={[{ label: 'Now' }]} />
+      </div>
+      <div class="mt-8">
+        <SectionHeading
+          label="Now"
+          title="いま、やっていること。"
+          description={`更新日: ${NOW.updatedAt}。SNSより落ち着いた近況の置き場です。`}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20 md:pb-28">
+    <div class="shell shell-narrow">
+      <ul class="space-y-4">
+        {
+          NOW.items.map((item, i) => (
+            <li
+              class="k-card flex items-start gap-4 p-5"
+              data-reveal
+              style={`transition-delay: ${i * 50}ms`}
+            >
+              <span class="k-tag shrink-0">{item.tag}</span>
+              <span class="text-sm leading-relaxed text-muted">{item.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <KoodoBand />
+</BaseLayout>

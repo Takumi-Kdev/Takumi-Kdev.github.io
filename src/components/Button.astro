@@ -1,0 +1,51 @@
+---
+// ============================================================
+// Button — 共通ボタン
+//   variant: primary（グラデーション）/ secondary（枠線）/ ghost
+// ============================================================
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  external?: boolean;
+  arrow?: boolean;
+  size?: 'md' | 'sm';
+}
+
+const { href, label, variant = 'primary', external = false, arrow = true, size = 'md' } = Astro.props;
+
+const base =
+  'group inline-flex items-center justify-center gap-2 rounded-full font-display font-medium transition-all duration-300';
+
+const sizes = {
+  md: 'px-6 py-3 text-sm',
+  sm: 'px-5 py-2.5 text-xs',
+};
+
+const variants = {
+  primary:
+    'text-white shadow-[0_12px_30px_-14px_rgba(37,99,235,0.65)] hover:opacity-90 hover:shadow-[0_18px_40px_-16px_rgba(37,99,235,0.7)]',
+  secondary: 'border border-line bg-surface text-ink hover:border-cobalt/50 hover:text-cobalt',
+  ghost: 'text-muted hover:text-cobalt',
+};
+
+const ext = external ? { target: '_blank', rel: 'noopener' } : {};
+---
+
+<a
+  href={href}
+  {...ext}
+  class={`${base} ${sizes[size]} ${variants[variant]}`}
+  style={variant === 'primary'
+    ? 'background-image: linear-gradient(135deg, #2563EB 0%, #4F46E5 48%, #0EA5A5 100%)'
+    : undefined}
+>
+  <span>{label}</span>
+  {
+    arrow && (
+      <span class="k-arrow transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+        →
+      </span>
+    )
+  }
+</a>

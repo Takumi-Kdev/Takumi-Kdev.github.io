@@ -1,0 +1,35 @@
+---
+// ============================================================
+// Breadcrumbs — パンくず（表示のみ。JSON-LDはページ側で付与）
+// ============================================================
+interface Props {
+  items: { label: string; href?: string }[];
+}
+
+const { items } = Astro.props;
+const all = [{ label: 'Home', href: '/' }, ...items];
+---
+
+<nav aria-label="パンくずリスト" class="font-mono text-xs">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-faint">
+    {
+      all.map((item, i) => {
+        const isLast = i === all.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {isLast || !item.href ? (
+              <span aria-current="page" class="text-cobalt">
+                {item.label}
+              </span>
+            ) : (
+              <a href={item.href} class="transition-colors hover:text-ink">
+                {item.label}
+              </a>
+            )}
+            {!isLast && <span aria-hidden="true">/</span>}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

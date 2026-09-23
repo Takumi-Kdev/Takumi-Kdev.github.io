@@ -1,0 +1,32 @@
+---
+// ============================================================
+// CodeCard — コード風カード（スクリーンショットの代わり）
+//   lines: 表示する行。先頭が // の行はコメントとして淡く表示。
+// ============================================================
+interface Props {
+  title?: string;
+  lines: string[];
+  footer?: string;
+}
+
+const { title = 'pipeline.py', lines, footer } = Astro.props;
+---
+
+<div class="overflow-hidden rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)]" data-reveal>
+  <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+    <span class="h-2.5 w-2.5 rounded-full bg-cobalt/70"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-indigo/60"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-teal/60"></span>
+    <span class="ml-2 font-mono text-[11px] text-faint">{title}</span>
+  </div>
+  <pre class="k-code !rounded-none !border-0 !shadow-none"><code>{lines.map((line) =>
+    line.trimStart().startsWith('//')
+      ? `// ${line.trim().replace(/^\/\/\s?/, '')}`
+      : line
+  ).join('\n')}</code></pre>
+  {
+    footer && (
+      <p class="border-t border-line px-4 py-3 font-mono text-[11px] text-faint">{footer}</p>
+    )
+  }
+</div>

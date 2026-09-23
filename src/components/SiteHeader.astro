@@ -1,0 +1,215 @@
+---
+// ============================================================
+// SiteHeader — 固定ナビ + テーマ切替
+//   レイアウトはユーティリティ、CSSは @layer components に置く
+//   （レイヤー外のCSSがユーティリティに勝つ事故を防ぐ）
+// ============================================================
+import { NAV, SITE } from '../data/site';
+import Monogram from './Monogram.astro';
+
+const current = Astro.url.pathname;
+const isActive = (href: string) => current === href || current.startsWith(`${href}/`);
+---
+
+<style>
+  @layer components {
+    .hamburger-lines {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 20px;
+    }
+    .hamburger-lines span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--color-ink);
+      transition: transform 0.3s var(--ease-soft), opacity 0.2s ease;
+    }
+    #nav-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    #nav-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(2) {
+      opacity: 0;
+    }
+    #nav-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      transition: max-height 0.45s var(--ease-soft), visibility 0.45s;
+    }
+    #mobile-menu.is-open {
+      max-height: 34rem;
+      visibility: visible;
+    }
+  }
+</style>
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur-md"
+>
+  <nav class="shell flex h-16 items-center justify-between" aria-label="メインナビゲーション">
+    <a href="/" class="flex items-center gap-2.5">
+      <Monogram size={34} decorative />
+      <span class="font-display text-lg font-semibold tracking-tight text-ink">
+        {SITE.handle}
+      </span>
+    </a>
+
+    <!-- PC ナビ -->
+    <div class="hidden items-center gap-7 lg:flex">
+      <ul class="flex items-center gap-7">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                aria-label={`${item.labelJa}（${item.label}）`}
+                class={`k-navlink font-display text-sm transition-colors ${
+                  isActive(item.href) ? 'text-ink' : 'text-muted hover:text-ink'
+                }`}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <button
+        id="theme-toggle"
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-cobalt/40 hover:text-cobalt"
+        aria-label="ダークモードに切り替える"
+      >
+        <span class="ph ph-moon text-lg" aria-hidden="true"></span>
+        <span class="ph ph-sun hidden text-lg" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- SP: テーマ切替 + ハンバーガー -->
+    <div class="flex items-center gap-1 lg:hidden">
+      <button
+        id="theme-toggle-mobile"
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full text-muted"
+        aria-label="ダークモードに切り替える"
+      >
+        <span class="ph ph-moon text-lg" aria-hidden="true"></span>
+        <span class="ph ph-sun hidden text-lg" aria-hidden="true"></span>
+      </button>      <button
+        id="nav-toggle"
+        class="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="hamburger-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- SP ドロワー -->
+  <div id="mobile-menu" class="border-t border-line bg-paper lg:hidden">
+    <div class="shell py-4">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class={`flex items-baseline justify-between border-b border-line py-3.5 transition-colors ${
+                  isActive(item.href) ? 'text-ink' : 'text-muted hover:text-ink'
+                }`}
+              >
+                <span class="font-display text-sm">{item.label}</span>
+                <span class="text-xs">{item.labelJa}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-5 mb-2 space-y-4">
+        <a
+          href={SITE.github}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center justify-center gap-2 rounded-full border border-line py-3.5 font-display text-sm text-ink"
+        >
+          <span class="ph ph-github-logo text-lg" aria-hidden="true"></span>
+          GitHub
+        </a>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="block text-center font-mono text-xs text-muted"
+        >
+          {SITE.email}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // SP ハンバーガー
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const setMenu = (open: boolean) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    menu?.classList.toggle('is-open', open);
+  };
+  toggle?.addEventListener('click', () => {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) setMenu(false);
+  });
+
+  // テーマ切替
+  const buttons = [
+    document.getElementById('theme-toggle'),
+    document.getElementById('theme-toggle-mobile'),
+  ].filter(Boolean) as HTMLButtonElement[];
+
+  const applyTheme = (theme: string) => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      /* noop */
+    }
+    const dark = theme === 'dark';
+    buttons.forEach((btn) => {
+      btn.setAttribute('aria-label', dark ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+      btn.querySelectorAll('.ph').forEach((icon) => {
+        const isSun = icon.classList.contains('ph-sun');
+        icon.classList.toggle('hidden', dark ? !isSun : isSun);
+      });
+    });
+  };
+
+  const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+  applyTheme(current);
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+  });
+</script>

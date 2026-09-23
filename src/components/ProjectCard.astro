@@ -1,0 +1,61 @@
+---
+// ============================================================
+// ProjectCard — 作品カード
+// ============================================================
+interface Props {
+  project: {
+    id: string;
+    data: {
+      title: string;
+      category: string;
+      categoryLabel: string;
+      year: string;
+      status: string;
+      summaryJa: string;
+      summaryEn?: string;
+      tech: string[];
+    };
+  };
+  index?: number;
+}
+
+const { project, index = 0 } = Astro.props;
+const { data } = project;
+---
+
+<a
+  href={`/projects/${project.id}/`}
+  class="k-card group flex flex-col p-7"
+  data-reveal
+  data-project={data.category}
+  style={`transition-delay: ${index * 70}ms`}
+>
+  <div class="flex items-center justify-between gap-3">
+    <span class="font-mono text-[11px] uppercase tracking-[0.15em] text-cobalt">
+      {data.categoryLabel}
+    </span>
+    <span class="font-mono text-[11px] text-faint">{data.year}</span>
+  </div>
+
+  <h3 class="mt-4 font-display text-lg font-semibold text-ink transition-colors group-hover:text-cobalt">
+    {data.title}
+  </h3>
+  <p class="mt-2 text-sm leading-relaxed text-muted">{data.summaryJa}</p>
+  {data.summaryEn && (
+    <p class="mt-1 font-mono text-[11px] leading-relaxed text-faint" lang="en">
+      {data.summaryEn}
+    </p>
+  )}
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    {data.tech.slice(0, 4).map((t) => <span class="k-tag">{t}</span>)}
+  </div>
+
+  <div class="mt-auto flex items-center justify-between pt-6">
+    <span class="font-mono text-[11px] text-faint">{data.status}</span>
+    <span class="k-arrow-link inline-flex items-center gap-1.5 font-display text-xs text-cobalt">
+      読む
+      <span class="k-arrow">→</span>
+    </span>
+  </div>
+</a>

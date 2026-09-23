@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="96" y2="96">
+      <stop offset="0" stop-color="#2563EB" />
+      <stop offset="0.5" stop-color="#4F46E5" />
+      <stop offset="1" stop-color="#0EA5A5" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="15%" cy="10%" r="50%">
+      <stop offset="0%" stop-color="#7DB8FF" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#7DB8FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="90%" cy="25%" r="45%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow3" cx="70%" cy="95%" r="45%">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#F7FAFE" />
+  <rect width="1200" height="630" fill="url(#glow1)" />
+  <rect width="1200" height="630" fill="url(#glow2)" />
+  <rect width="1200" height="630" fill="url(#glow3)" />
+
+  <!-- モノグラム -->
+  <g transform="translate(96 104) scale(1.15)">
+    <polygon points="48,4 88,26 88,70 48,92 8,70 8,26" fill="none" stroke="url(#grad)" stroke-width="3" />
+    <g stroke="url(#grad)" stroke-width="7" stroke-linecap="square" fill="none">
+      <path d="M34 28 V68" />
+      <path d="M37 48 L58 28" />
+      <path d="M37 48 L60 68" />
+    </g>
+    <circle cx="62" cy="25" r="4" fill="url(#grad)" />
+  </g>
+
+  <!-- テキスト -->
+  <g transform="translate(240 128)">
+    <text x="0" y="34" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#0B1F35">Takumi-Kdev</text>
+    <text x="2" y="66" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="16" fill="#516B88">河合巧実 / 高校生開発者</text>
+  </g>
+
+  <g transform="translate(96 300)">
+    <rect x="0" y="0" width="72" height="6" rx="3" fill="url(#grad)" />
+    <text x="0" y="92" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="60" font-weight="600" fill="#0B1F35">つくって、動かして、記録する。</text>
+    <text x="0" y="152" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-size="24" fill="#516B88">Build, ship, and document.</text>
+  </g>
+
+  <g transform="translate(96 540)">
+    <text x="0" y="0" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-size="18" letter-spacing="2" fill="#2563EB">takumi-kdev.github.io</text>
+  </g>
+
+  <rect x="1180" y="0" width="20" height="630" fill="url(#grad)" opacity="0.25" />
+</svg>

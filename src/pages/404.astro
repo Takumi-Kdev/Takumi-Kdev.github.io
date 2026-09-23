@@ -1,0 +1,36 @@
+---
+// ============================================================
+// 404
+// ============================================================
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Monogram from '../components/Monogram.astro';
+---
+
+<BaseLayout
+  title="404 — Takumi-Kdev"
+  description="お探しのページは見つかりませんでした。"
+  noindex
+>
+  <section class="relative flex min-h-[60vh] items-center overflow-hidden hero-veil">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <span class="aurora-blob left-[20%] top-[-20%] h-[20rem] w-[20rem] bg-sky"></span>
+    </div>
+    <div class="shell relative py-20 text-center">
+      <div class="flex justify-center">
+        <Monogram size={88} decorative />
+      </div>
+      <p class="eyebrow mt-8">404 — Not Found</p>
+      <h1 class="palt mt-4 font-display text-2xl font-semibold text-ink md:text-3xl">
+        ページが、見つかりません。
+      </h1>
+      <p class="mt-5 text-sm leading-relaxed text-muted">
+        移動したか、削除された可能性があります。
+      </p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Button href="/" label="ホームへ戻る" variant="primary" />
+        <Button href="/projects" label="作品を見る" variant="secondary" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

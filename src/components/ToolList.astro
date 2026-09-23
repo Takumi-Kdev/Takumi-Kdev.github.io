@@ -1,0 +1,35 @@
+---
+// ============================================================
+// ToolList — 開発環境の一覧
+// ============================================================
+interface Props {
+  groups: readonly {
+    title: string;
+    icon: string;
+    items: readonly { name: string; note: string }[];
+  }[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+  {
+    groups.map((group, gi) => (
+      <section class="k-card p-7" data-reveal style={`transition-delay: ${gi * 60}ms`}>
+        <div class="flex items-center gap-3">
+          <span class={`${group.icon} text-xl text-cobalt`} aria-hidden="true" />
+          <h2 class="font-display text-lg font-semibold text-ink">{group.title}</h2>
+        </div>
+        <ul class="mt-5 space-y-3">
+          {group.items.map((item) => (
+            <li class="flex flex-col border-b border-line pb-3 last:border-0 last:pb-0">
+              <span class="text-sm text-ink">{item.name}</span>
+              <span class="mt-0.5 text-xs text-muted">{item.note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>

@@ -1,0 +1,49 @@
+---
+// ============================================================
+// Monogram — Takumi-Kdev の幾何モノグラム
+//   六角形フレーム + 「K」 + ノードドット（青グラデーション）
+//   ※ 縦線はグラデーションのバウンディングボックス問題を避けるため
+//      gradientUnits="userSpaceOnUse" を必須とする
+// ============================================================
+interface Props {
+  size?: number;
+  /** 隣に文字がある場合は true（読み上げの二重化を防ぐ） */
+  decorative?: boolean;
+  /** 一意なグラデーションID（同一ページに複数置く場合に指定） */
+  gradientId?: string;
+}
+
+const { size = 72, decorative = false, gradientId = 'kdev-grad' } = Astro.props;
+const id = `${gradientId}-${Math.random().toString(36).slice(2, 7)}`;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 96 96"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role={decorative ? undefined : 'img'}
+  aria-label={decorative ? undefined : 'Takumi-Kdev ロゴマーク'}
+  aria-hidden={decorative ? 'true' : undefined}
+>
+  <defs>
+    <linearGradient id={id} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="96" y2="96">
+      <stop offset="0" stop-color="#2563EB" />
+      <stop offset="0.5" stop-color="#4F46E5" />
+      <stop offset="1" stop-color="#0EA5A5" />
+    </linearGradient>
+  </defs>
+  <polygon
+    points="48,4 88,26 88,70 48,92 8,70 8,26"
+    fill="none"
+    stroke={`url(#${id})`}
+    stroke-width="3"
+  />
+  <g stroke={`url(#${id})`} stroke-width="7" stroke-linecap="square" fill="none">
+    <path d="M34 28 V68" />
+    <path d="M37 48 L58 28" />
+    <path d="M37 48 L60 68" />
+  </g>
+  <circle cx="62" cy="25" r="4" fill={`url(#${id})`} />
+</svg>

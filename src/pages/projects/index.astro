@@ -1,0 +1,61 @@
+---
+// ============================================================
+// 作品一覧
+// ============================================================
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import FilterTabs from '../../components/FilterTabs.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import KoodoBand from '../../components/KoodoBand.astro';
+import { breadcrumbJsonLd } from '../../utils/seo';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const jsonLd = [breadcrumbJsonLd([{ label: 'Works', href: '/projects' }])];
+---
+
+<BaseLayout
+  title="作品 — Takumi-Kdev"
+  description="Takumi-Kdev の個人開発プロジェクト一覧。AIシステム、業務自動化、アプリ開発の設計と実装をまとめています。"
+  jsonLd={jsonLd}
+>
+  <section class="relative overflow-hidden hero-veil">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <span class="aurora-blob right-[-10%] top-[-30%] h-[22rem] w-[22rem] bg-sky"></span>
+      <span
+        class="aurora-blob left-[-8%] top-[20%] h-[18rem] w-[18rem] bg-indigo"
+        style="animation-delay: -10s"
+      ></span>
+    </div>
+
+    <div class="shell relative pb-10 pt-14 md:pt-20">
+      <div data-reveal>
+        <Breadcrumbs items={[{ label: 'Works' }]} />
+      </div>
+      <div class="mt-8">
+        <SectionHeading
+          label="Works"
+          title="つくってきたもの。"
+          description="すべて個人開発のプロジェクトです。何を考えて、どうつくったかまで書いています。"
+        />
+      </div>
+      <div class="mt-9">
+        <FilterTabs />
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20 md:pb-28">
+    <div class="shell">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <KoodoBand />
+</BaseLayout>

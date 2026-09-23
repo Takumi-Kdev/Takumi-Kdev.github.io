@@ -1,0 +1,26 @@
+---
+// ============================================================
+// KoodoBand — 仕事の依頼は巧黄土へ
+// ============================================================
+import { KOODO } from '../data/site';
+import Button from './Button.astro';
+---
+
+<section class="section-tight">
+  <div class="shell">
+    <div class="grad-border overflow-hidden rounded-3xl p-8 md:p-12" data-reveal>
+      <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
+        <div class="md:col-span-8">
+          <p class="eyebrow mb-4">Business</p>
+          <h2 class="palt font-display text-xl font-semibold text-ink md:text-2xl">
+            {KOODO.title}
+          </h2>
+          <p class="mt-4 max-w-2xl text-sm leading-relaxed text-muted">{KOODO.body}</p>
+        </div>
+        <div class="md:col-span-4 md:text-right">
+          <Button href={KOODO.url} label={KOODO.label} external variant="primary" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

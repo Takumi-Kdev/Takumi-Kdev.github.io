@@ -1,0 +1,158 @@
+---
+// ============================================================
+// 作品詳細
+// ============================================================
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import KoodoBand from '../../components/KoodoBand.astro';
+import { breadcrumbJsonLd, projectJsonLd } from '../../utils/seo';
+
+export async function getStaticPaths() {
+  const all = await getCollection('projects');
+  const sorted = [...all].sort((a, b) => a.data.order - b.data.order);
+  return sorted.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: sorted[i - 1] ?? null,
+      next: sorted[i + 1] ?? null,
+    },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
+const { data } = project;
+
+const jsonLd = [
+  projectJsonLd({
+    id: project.id,
+    title: data.title,
+    summaryJa: data.summaryJa,
+    repo: data.repo,
+    tech: data.tech,
+  }),
+  breadcrumbJsonLd([
+    { label: 'Works', href: '/projects' },
+    { label: data.title },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${data.title} — Takumi-Kdev`}
+  description={data.summaryJa}
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="relative overflow-hidden border-b border-line hero-veil">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <span class="aurora-blob left-[10%] top-[-40%] h-[20rem] w-[20rem] bg-sky"></span>
+      </div>
+
+      <div class="shell relative py-14 md:py-20">
+        <div data-reveal>
+          <Breadcrumbs items={[{ label: 'Works', href: '/projects' }, { label: data.title }]} />
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-10 md:grid-cols-12">
+          <div class="md:col-span-8" data-reveal>
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="eyebrow">{data.categoryLabel}</span>
+              <span class="font-mono text-[11px] text-faint">{data.year}</span>
+              <span class="k-tag">{data.status}</span>
+            </div>
+            <h1 class="palt mt-5 font-display text-3xl font-semibold text-ink md:text-4xl">
+              {data.title}
+            </h1>
+            <p class="mt-5 max-w-xl leading-relaxed text-muted">{data.summaryJa}</p>
+            {data.summaryEn && (
+              <p class="mt-2 font-display text-sm text-faint" lang="en">{data.summaryEn}</p>
+            )}
+            <div class="mt-6 flex flex-wrap gap-2">
+              {data.tech.map((t) => <span class="k-tag">{t}</span>)}
+            </div>
+          </div>
+
+          <aside class="md:col-span-4" data-reveal>
+            <div class="k-card p-6">
+              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Highlights</p>
+              <ul class="mt-4 space-y-3">
+                {
+                  data.highlights.map((h) => (
+                    <li class="flex items-start gap-2.5 text-sm leading-relaxed text-muted">
+                      <span class="ph ph-caret-right mt-1 text-xs text-cobalt" aria-hidden="true" />
+                      <span>{h}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={data.repo}
+                  target="_blank"
+                  rel="noopener"
+                  class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-cobalt"
+                >
+                  <span class="ph ph-github-logo text-base" aria-hidden="true"></span>
+                  GitHub
+                  <span class="k-arrow">→</span>
+                </a>
+                {
+                  data.demo && (
+                    <a
+                      href={data.demo}
+                      target="_blank"
+                      rel="noopener"
+                      class="k-arrow-link inline-flex items-center gap-2 font-display text-sm text-cobalt"
+                    >
+                      Demo
+                      <span class="k-arrow">→</span>
+                    </a>
+                  )
+                }
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <div class="py-14 md:py-20">
+      <div class="shell shell-narrow">
+        <div class="prose-k" data-reveal>
+          <Content />
+        </div>
+
+        <nav class="mt-16 flex items-center justify-between gap-6 border-t border-line pt-8" aria-label="作品の移動">
+          {
+            prev ? (
+              <a href={`/projects/${prev.id}/`} class="k-arrow-link text-sm text-muted transition-colors hover:text-cobalt">
+                <span class="mr-2" aria-hidden="true">←</span>
+                {prev.data.title}
+              </a>
+            ) : (
+              <span></span>
+            )
+          }
+          {
+            next ? (
+              <a
+                href={`/projects/${next.id}/`}
+                class="k-arrow-link text-right text-sm text-muted transition-colors hover:text-cobalt"
+              >
+                {next.data.title}
+                <span class="k-arrow ml-2" aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <span></span>
+            )
+          }
+        </nav>
+      </div>
+    </div>
+  </article>
+
+  <KoodoBand />
+</BaseLayout>

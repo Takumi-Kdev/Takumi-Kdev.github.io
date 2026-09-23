@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Takumi-Kdev ロゴマーク">
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="96" y2="96">
+      <stop offset="0" stop-color="#2563EB" />
+      <stop offset="0.5" stop-color="#4F46E5" />
+      <stop offset="1" stop-color="#0EA5A5" />
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="20" fill="#F7FAFE" />
+  <polygon points="48,10 82,29 82,67 48,86 14,67 14,29" fill="none" stroke="url(#g)" stroke-width="3" />
+  <g stroke="url(#g)" stroke-width="7" stroke-linecap="square" fill="none">
+    <path d="M36 30 V66" />
+    <path d="M39 48 L58 30" />
+    <path d="M39 48 L60 66" />
+  </g>
+  <circle cx="62" cy="27" r="4" fill="url(#g)" />
+</svg>
