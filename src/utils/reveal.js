@@ -43,7 +43,6 @@ export function initReveal() {
       once: true,
       passive: true,
     });
-    setTimeout(() => els.forEach((el) => addRevealed(el)), 4000);
   } else {
     els.forEach((el) => addRevealed(el));
   }
