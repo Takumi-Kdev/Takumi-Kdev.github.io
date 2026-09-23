@@ -6,7 +6,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import KoodoBand from '../../components/KoodoBand.astro';
-import { breadcrumbJsonLd, projectJsonLd } from '../../utils/seo';
+import { projectJsonLd } from '../../utils/seo';
 
 export async function getStaticPaths() {
   const all = await getCollection('projects');
@@ -33,10 +33,6 @@ const jsonLd = [
     repo: data.repo,
     tech: data.tech,
   }),
-  breadcrumbJsonLd([
-    { label: '作品', href: '/projects' },
-    { label: data.title },
-  ]),
 ];
 ---
 

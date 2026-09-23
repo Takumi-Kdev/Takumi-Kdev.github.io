@@ -1,0 +1,27 @@
+# Takumi-Kdev（河合巧実）
+
+> 愛知県豊橋市の高校生開発者。AIとWebのシステムを個人開発しています。つくったものは設計もコードも公開しています。
+
+## 基本情報
+
+- 名前: 河合巧実（Takumi-Kdev）
+- 所在地: 愛知県豊橋市
+- 仕事: 個人開発（AI・Webシステム）／事業の窓口は「巧黄土」
+- GitHub: https://github.com/Takumi-Kdev
+- メール: contact.teenext@gmail.com
+- SNS: https://www.instagram.com/koodo.next ・ https://x.com/koodoproger
+
+## 主要ページ
+
+- ホーム: https://takumi-kdev.github.io/
+- 作品一覧: https://takumi-kdev.github.io/projects/
+- 作品詳細（例）: https://takumi-kdev.github.io/projects/aifunrun-video/
+- About: https://takumi-kdev.github.io/about/
+- Uses（開発環境）: https://takumi-kdev.github.io/uses/
+- Now（近況）: https://takumi-kdev.github.io/now/
+- Contact: https://takumi-kdev.github.io/contact/
+
+## 仕事の依頼について
+
+仕事の依頼は、事業サイト「巧黄土」（https://koodo-prog.com）で受け付けています。
+ホームページ制作・AI業務自動化・AIの使い方相談・小さなシステム開発・保守サポート。

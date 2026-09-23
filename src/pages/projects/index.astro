@@ -9,13 +9,22 @@ import SectionHeading from '../../components/SectionHeading.astro';
 import FilterTabs from '../../components/FilterTabs.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import KoodoBand from '../../components/KoodoBand.astro';
-import { breadcrumbJsonLd } from '../../utils/seo';
+import { itemListJsonLd } from '../../utils/seo';
+import { SITE } from '../../data/site';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-const jsonLd = [breadcrumbJsonLd([{ label: '作品', href: '/projects' }])];
+const jsonLd = [
+  itemListJsonLd(
+    '作品一覧',
+    projects.map((p) => ({
+      name: p.data.title,
+      url: `${SITE.url}/projects/${p.id}/`,
+    }))
+  ),
+];
 ---
 
 <BaseLayout

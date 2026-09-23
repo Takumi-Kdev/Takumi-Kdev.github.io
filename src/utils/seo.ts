@@ -27,8 +27,25 @@ export function personJsonLd(): JsonLdObject {
       addressRegion: '愛知県',
       addressLocality: '豊橋市',
     },
-    sameAs: [SITE.github, SITE.koodoUrl],
+    sameAs: [SITE.github, SITE.koodoUrl, 'https://www.instagram.com/koodo.next', 'https://x.com/koodoproger'],
     knowsAbout: ['AI', 'Web開発', '業務自動化', 'アプリ開発'],
+  };
+}
+
+export function itemListJsonLd(
+  name: string,
+  items: { name: string; url: string }[]
+): JsonLdObject {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: item.url,
+    })),
   };
 }
 

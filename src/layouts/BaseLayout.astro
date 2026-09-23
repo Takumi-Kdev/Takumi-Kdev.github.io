@@ -55,7 +55,16 @@ const blocks: JsonLdObject[] = [personJsonLd(), websiteJsonLd(), ...jsonLd];
     <meta name="description" content={description} />
     <meta name="author" content={SITE.handle} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+      )
+    }
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -66,10 +75,16 @@ const blocks: JsonLdObject[] = [personJsonLd(), websiteJsonLd(), ...jsonLd];
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={`${SITE.handle} — ${SITE.taglineJa}`} />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#F7FAFE" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#071426" media="(prefers-color-scheme: dark)" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={`${SITE.handle} のロゴマーク`} />
+    <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121A22" media="(prefers-color-scheme: dark)" />
 
     <!-- アイコン -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
